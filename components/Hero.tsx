@@ -21,9 +21,8 @@ export default function Hero() {
   const sheenBackground = useMotionTemplate`radial-gradient(circle 260px at ${tilt.mx} ${tilt.my}, rgba(237,234,226,0.06), transparent 70%)`;
 
   return (
-    <section className="relative z-2 grid min-h-screen grid-cols-1 content-center items-center gap-8 px-6 pb-8 pt-28 md:px-20 md:pb-10 md:pt-32 lg:grid-cols-[1.15fr_0.85fr] lg:pb-12">
+    <section id="hero" className="relative z-2 grid min-h-screen grid-cols-1 content-center items-center gap-8 px-6 pb-8 pt-28 md:px-20 md:pb-10 md:pt-32 lg:grid-cols-[1.15fr_0.85fr] lg:pb-12">
       <GridBackground />
-      {/* ---- Left: headline, copy, CTAs ---- */}
       <div className="max-w-160">
         <motion.div
           initial={{ opacity: 0, y: 14 }}
@@ -135,7 +134,6 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* ---- Right: terminal card, cursor-tilt via Motion, typed sequence via GSAP ---- */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -217,7 +215,7 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="flex justify-between border-t border-white/6 bg-[#232427] px-4.5 py-3 font-mono text-[11px] text-on-dark/35">
+            <div className="flex justify-between border-t border-white/6 bg-[#232427] px-4.5 py-3 font-mono text-2.75 text-on-dark/35">
               <span>zsh · 5 years uptime</span>
               <span className="flex items-center gap-1.5 text-[#7FB88F]">
                 <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-[#7FB88F]" />
