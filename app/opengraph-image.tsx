@@ -7,6 +7,10 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = SITE_TITLE;
 
+// Portrait lives at /public/og-portrait.jpg — a studio shot, watermark
+// already removed before upload. The try/catch guards against the file
+// going missing later (e.g. accidentally deleted), falling back to the
+// plain tinted panel below rather than a broken OG image.
 async function loadPortrait(): Promise<Buffer | null> {
   try {
     return await readFile(join(process.cwd(), "public", "og-portrait.jpg"));
@@ -71,7 +75,7 @@ export default async function OpengraphImage() {
           background: "#ffffff",
         }}
       >
-    
+        {/* left: portrait, fills roughly 45% of the width */}
         <div
           style={{
             width: "45%",
@@ -82,6 +86,7 @@ export default async function OpengraphImage() {
           }}
         >
           {portraitSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element -- ImageResponse renders via satori, not the DOM; next/image doesn't apply here
             <img
               src={portraitSrc}
               alt=""
@@ -90,8 +95,11 @@ export default async function OpengraphImage() {
               style={{ objectFit: "cover", width: "100%", height: "100%" }}
             />
           ) : (
+            // fallback if the portrait file hasn't been added yet — a
+            // plain pine-tinted panel rather than a broken image
             <div
               style={{
+                display: "flex",
                 width: "100%",
                 height: "100%",
                 background:
@@ -101,6 +109,7 @@ export default async function OpengraphImage() {
           )}
         </div>
 
+        {/* right: name, title, eyebrow — matches the hero's own type system */}
         <div
           style={{
             width: "55%",
@@ -123,6 +132,7 @@ export default async function OpengraphImage() {
           >
             <div
               style={{
+                display: "flex",
                 width: 8,
                 height: 8,
                 borderRadius: "50%",
@@ -135,6 +145,8 @@ export default async function OpengraphImage() {
 
           <div
             style={{
+              display: "flex",
+              flexDirection: "column",
               fontFamily: frauncesData ? "Fraunces" : "serif",
               fontWeight: 500,
               fontSize: 60,
@@ -143,13 +155,13 @@ export default async function OpengraphImage() {
               marginBottom: 20,
             }}
           >
-            Ifechukwu
-            <br />
-            Max-Oti
+            <span>Ifechukwu</span>
+            <span>Max-Oti</span>
           </div>
 
           <div
             style={{
+              display: "flex",
               fontFamily: monoData ? "JetBrains Mono" : "monospace",
               fontSize: 20,
               color: "#5c6360",

@@ -3,6 +3,9 @@ import { ImageResponse } from "next/og";
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
+// Larger version of the same mark as icon.tsx (browser tab favicon), for
+// iOS home-screen bookmarks — see that file for the shared font-loading
+// approach and why colors are hardcoded rather than read from CSS tokens.
 async function loadFrauncesBold(): Promise<ArrayBuffer | null> {
   try {
     const css = await fetch(
@@ -35,6 +38,7 @@ export default async function AppleIcon() {
       >
         <div
           style={{
+            display: "flex",
             width: 34,
             height: 34,
             borderRadius: "50%",
@@ -45,6 +49,7 @@ export default async function AppleIcon() {
         />
         <div
           style={{
+            display: "flex",
             fontFamily: fontData ? "Fraunces" : "serif",
             fontSize: 92,
             fontWeight: 600,

@@ -3,7 +3,16 @@ import { ImageResponse } from "next/og";
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
-
+// Matches the real nav logo (see components/Nav.tsx #nav-logo): a small
+// pine-green dot next to "Ife" in the display serif. Colors are hardcoded
+// to match the --color-bg / --color-pine / --color-paper values in
+// app/globals.css — next/og's renderer can't read CSS custom properties
+// or use next/font instances directly (those only expose a CSS class/
+// family name, not the raw font bytes ImageResponse needs), so the font
+// file is fetched here via Google Fonts' CSS API — the standard pattern
+// for loading a real font into an ImageResponse. Falls back to a generic
+// serif if the fetch fails for any reason (offline build, rate limit),
+// so the favicon still renders something reasonable either way.
 async function loadFrauncesBold(): Promise<ArrayBuffer | null> {
   try {
     const css = await fetch(
@@ -37,6 +46,7 @@ export default async function Icon() {
       >
         <div
           style={{
+            display: "flex",
             width: 7,
             height: 7,
             borderRadius: "50%",
@@ -47,6 +57,7 @@ export default async function Icon() {
         />
         <div
           style={{
+            display: "flex",
             fontFamily: fontData ? "Fraunces" : "serif",
             fontSize: 20,
             fontWeight: 600,
