@@ -1,7 +1,7 @@
 // TODO: replace with the real production domain once decided, then this
 // one change propagates to metadataBase (layout.tsx), robots.txt,
 // sitemap.xml, and canonical URLs everywhere they're referenced.
-export const SITE_URL = "https://ifechukwu-portfolio.example.com";
+export const SITE_URL = "https://ife-dev.netlify.app";
 
 export const SITE_NAME = "Ifechukwu Max-Oti";
 export const SITE_TITLE = "Ifechukwu Max-Oti - Frontend Developer & Tutor";
