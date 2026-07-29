@@ -19,7 +19,7 @@ function TypingDots() {
           key={i}
           animate={{ y: [0, -3, 0], opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 0.7, repeat: Infinity, delay: i * 0.12 }}
-          className="h-[5px] w-[5px] rounded-full bg-pine"
+          className="h-1.25 w-1.25 rounded-full bg-pine"
         />
       ))}
     </div>
@@ -40,7 +40,7 @@ export default function Teaching() {
   }
 
   return (
-    <section id="teaching" className="relative z-[2] border-t border-line px-6 py-24 md:px-20 md:py-36">
+    <section id="teaching" className="relative z-2 border-t border-line px-6 py-24 md:px-20 md:py-36">
       <div className="mb-16 flex items-baseline gap-3 md:gap-4.5">
         <span className="font-mono text-sm text-pine">04</span>
         <h2 className="font-display text-[26px] font-medium tracking-tight text-paper md:whitespace-nowrap md:text-[42px]">
@@ -57,11 +57,11 @@ export default function Teaching() {
           variants={slideFromLeft}
           onViewportEnter={() => setStarted(true)}
           onMouseMove={handleMouseMove}
-          className="relative overflow-hidden rounded-xl border border-line bg-surface p-8 transition-[border-color,box-shadow] duration-[400ms] hover:border-brass/25 hover:shadow-[0_30px_60px_-25px_rgba(0,0,0,0.5)]"
+          className="relative overflow-hidden rounded-xl border border-line bg-surface p-8 transition-[border-color,box-shadow] duration-400 hover:border-brass/25 hover:shadow-[0_30px_60px_-25px_rgba(0,0,0,0.5)]"
         >
           <motion.div className="pointer-events-none absolute inset-0" style={{ background: glowBg }} />
 
-          <span className="relative mb-[18px] block font-mono text-[11px] uppercase tracking-wide text-brass">
+          <span className="relative mb-4.5 block font-mono text-[11px] uppercase tracking-wide text-brass">
             Real conversation, paraphrased
           </span>
 
@@ -95,7 +95,7 @@ export default function Teaching() {
                     style={{ overflow: "hidden" }}
                     className="flex items-center gap-2.5"
                   >
-                    <div className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full bg-pine-dim font-mono text-[10px] text-on-dark">
+                    <div className="flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded-full bg-pine-dim font-mono text-[10px] text-on-dark">
                       Ife
                     </div>
                     <div className="flex gap-1 rounded-lg border border-pine/20 bg-pine/10 px-3.5 py-3">
@@ -118,14 +118,14 @@ export default function Teaching() {
                 >
                   <motion.div
                     whileHover={{ scale: 1.12 }}
-                    className={`flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full font-mono text-[10px] ${
+                    className={`flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded-full font-mono text-[10px] ${
                       isMentor ? "bg-pine-dim text-on-dark" : "bg-surface-raised text-stone"
                     }`}
                   >
                     {isMentor ? "Ife" : "S"}
                   </motion.div>
                   <div
-                    className={`max-w-[320px] rounded-lg px-3.5 py-2.5 text-[13px] leading-[1.5] ${
+                    className={`max-w-[320px] rounded-lg px-3.5 py-2.5 text-[13px] leading-normal ${
                       isMentor
                         ? "border border-pine/20 bg-pine/10 text-paper"
                         : "bg-surface-raised text-ink-soft"
@@ -140,17 +140,17 @@ export default function Teaching() {
         </motion.div>
 
         <motion.div initial="hidden" whileInView="visible" viewport={viewportOnce} variants={slideFromRight}>
-          <h3 className="mb-5 font-display text-[26px] font-medium leading-[1.25] text-paper sm:text-[34px]">
+          <h3 className="mb-5 font-display text-[26px] font-medium leading-tight text-paper sm:text-[34px]">
             I explain the <em className="italic text-pine">why</em>, not
             just the <em className="italic text-pine">how</em>.
           </h3>
-          <p className="mb-6 max-w-[480px] text-[15.5px] leading-[1.75] text-ink-soft">
+          <p className="mb-6 max-w-120 text-[15.5px] leading-[1.75] text-ink-soft">
             Since 2023 I&apos;ve mentored beginner developers at West Africa
-            People&apos;s Institute and, currently, Attueyi Coding Academy —
+            People&apos;s Institute and, currently, Attueyi Coding Academy -
             breaking down complex frontend concepts into practical,
             project-based lessons that actually stick.
           </p>
-          <p className="mb-6 max-w-[480px] text-[15.5px] leading-[1.75] text-ink-soft">
+          <p className="mb-6 max-w-120 text-[15.5px] leading-[1.75] text-ink-soft">
             Teaching sharpens the way I build. Explaining a concept clearly
             to someone new means I understand it more deeply myself — which
             shows up in cleaner components and more maintainable code.

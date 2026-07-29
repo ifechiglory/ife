@@ -4,15 +4,6 @@ import { useRef, type MouseEvent } from "react";
 import { useMotionValue, useSpring } from "motion/react";
 import { magneticSpring } from "@/lib/motion";
 
-/**
- * Magnetic pull effect for buttons. Uses Motion's useMotionValue + useSpring
- * directly — this is the real primitive Motion ships for this exact effect,
- * not a reimplementation of spring physics via GSAP or manual transforms.
- *
- * Usage:
- *   const { ref, x, y, onMouseMove, onMouseLeave } = useMagnetic();
- *   <motion.div ref={ref} style={{ x, y }} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
- */
 export function useMagnetic(strength = 0.35) {
   const ref = useRef<HTMLDivElement>(null);
   const rawX = useMotionValue(0);

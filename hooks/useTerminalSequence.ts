@@ -3,21 +3,6 @@
 import { useEffect, useRef, type RefObject } from "react";
 import { gsap } from "gsap";
 
-/**
- * Drives the hero terminal's typed-command sequence.
- *
- * This stays on GSAP deliberately: it's a precisely-timed, multi-phase
- * timeline (command 1 types in -> four staggered outputs -> command 2
- * types in -> its output -> command 3 types in -> its output -> caret
- * settles into an idle blink) — exactly the kind of sequenced
- * orchestration GSAP's timeline API is built for. Motion's variants/
- * stagger are the right tool for independent component reveals; they're
- * a worse fit for "this exact frame-accurate sequence across unrelated
- * DOM nodes," which is what a terminal session is.
- *
- * All other interactions in this codebase (hover, tilt, magnetic pull,
- * scroll reveals) are Motion. This is the one deliberate exception.
- */
 export function useTerminalSequence(containerRef: RefObject<HTMLDivElement | null>) {
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 

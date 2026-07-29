@@ -18,24 +18,6 @@ export interface TooltipState {
 
 const EMPTY_TOOLTIP: TooltipState = { name: "", level: 0, category: "", color: "", x: 0, y: 0, visible: false };
 
-/**
- * Builds and animates the skills constellation entirely via GSAP + direct
- * SVG DOM manipulation, the same way useTerminalSequence owns the hero
- * terminal. This stays off Motion deliberately: the visualization involves
- * dozens of dynamically-created SVG elements (nodes, spokes, relation
- * lines, pulse dots) whose positions depend on trig math and a
- * mobile/desktop responsive branch — expressing that declaratively as JSX
- * would mean either a huge conditional render tree or fighting React's
- * reconciliation for what is fundamentally an imperative drawing routine.
- * GSAP timelines + gsap.context() (for clean teardown on unmount) are the
- * right tool here, same reasoning as the terminal sequence.
- *
- * Tooltip state is owned internally (returned, not taken as a callback
- * prop) — building the SVG is a one-time effect that should only ever run
- * once per mount, and taking an external callback would either need the
- * caller to memoize it perfectly or risk the effect re-running (and
- * rebuilding the whole constellation) on every tooltip update.
- */
 export function useSkillsOrbit(
   containerRef: RefObject<HTMLDivElement | null>,
   svgRef: RefObject<SVGSVGElement | null>

@@ -3,13 +3,6 @@
 import { useRef, type MouseEvent } from "react";
 import { useMotionValue, useSpring, useTransform } from "motion/react";
 
-/**
- * Cursor-following 3D tilt, built entirely on Motion primitives:
- * useMotionValue for raw pointer position, useTransform to map it to a
- * rotation range, useSpring for the settle/return motion. No manual
- * requestAnimationFrame or GSAP tweening — this is Motion's intended
- * pattern for exactly this effect.
- */
 export function useTilt(maxTilt = 14) {
   const ref = useRef<HTMLDivElement>(null);
   const px = useMotionValue(0.5);

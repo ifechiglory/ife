@@ -8,15 +8,6 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-/**
- * Scrub-linked progress fill for the experience timeline's vertical line,
- * plus active-state toggling per timeline item as it enters/leaves view.
- *
- * Scoped to GSAP ScrollTrigger rather than Motion's useScroll: this needs
- * `scrub` tied to a trigger range plus independent onEnter/onLeaveBack
- * callbacks per timeline item, which ScrollTrigger expresses more directly
- * than composing multiple useScroll + useTransform chains would.
- */
 export function useTimelineProgress(
   containerRef: RefObject<HTMLDivElement | null>,
   progressRef: RefObject<HTMLDivElement | null>

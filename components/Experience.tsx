@@ -12,7 +12,7 @@ export default function Experience() {
   useTimelineProgress(containerRef, progressRef);
 
   return (
-    <section id="experience" className="relative z-[2] border-t border-line px-6 py-24 md:px-20 md:py-36">
+    <section id="work" className="relative z-2 border-t border-line px-6 py-24 md:px-20 md:py-36">
       <div className="mb-16 flex items-baseline gap-3 md:gap-4.5">
         <span className="font-mono text-sm text-pine">02</span>
         <h2 className="font-display text-[26px] font-medium tracking-tight text-paper md:whitespace-nowrap md:text-[42px]">
@@ -21,7 +21,7 @@ export default function Experience() {
         <span className="mt-1 h-px flex-1 bg-line" />
       </div>
 
-      <div ref={containerRef} className="relative ml-1.5 max-w-[760px]">
+      <div ref={containerRef} className="relative ml-1.5 max-w-190">
         <div className="absolute inset-y-1.5 left-0 w-px bg-line" />
         <div
           ref={progressRef}
@@ -39,13 +39,13 @@ export default function Experience() {
             whileHover={{ x: 6 }}
             className="group/item relative pb-16 pl-10 last:pb-0 sm:pb-14 [&.is-active_.timeline-dot]:border-pine [&.is-active_.timeline-dot]:bg-pine [&.is-active_.timeline-dot]:shadow-[0_0_0_4px_rgba(47,122,82,0.15)]"
           >
-            <span className="timeline-dot absolute -left-[4.5px] top-1 h-2.5 w-2.5 rounded-full border-2 border-stone bg-bg transition-[border-color,background,box-shadow] duration-[400ms]" />
+            <span className="timeline-dot absolute left-[-4.5px] top-1 h-2.5 w-2.5 rounded-full border-2 border-stone bg-bg transition-[border-color,background,box-shadow] duration-400" />
 
             <div className="font-display text-[19px] font-medium leading-[1.3] text-paper transition-colors duration-300 group-hover/item:text-pine-dim sm:text-[22px]">
               {item.role} <span className="text-pine">@ {item.company}</span>
             </div>
             <div className="mt-1 font-mono text-[12.5px] text-stone">{item.period}</div>
-            <p className="mt-3.5 max-w-[560px] text-[15px] leading-[1.7] text-ink-soft">
+            <p className="mt-3.5 max-w-140 text-[15px] leading-[1.7] text-ink-soft">
               {item.description}
             </p>
           </motion.div>

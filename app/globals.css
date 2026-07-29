@@ -1,28 +1,17 @@
 @import "tailwindcss";
 
-/* ============ DESIGN TOKENS (Tailwind v4 CSS-first config) ============
-   No tailwind.config.js — v4 reads tokens straight from this @theme block
-   and auto-generates utilities from them (e.g. --color-pine → bg-pine,
-   text-pine, border-pine, etc). */
 @theme {
-  /* ---- cool paper / light theme ----
-     Same token names as before so components (bg-bg, text-paper, bg-surface,
-     etc.) don't need any class changes — only what these tokens resolve to
-     has changed. Elevation direction is inverted from the old dark theme:
-     surfaces get lighter/whiter as they raise, not darker. */
-  --color-bg: #ffffff; /* pure white — grey paper read as dull, white lets accents pop */
-  --color-surface: #f6f7f6; /* cards sit a hair off-white for subtle separation */
-  --color-surface-raised: #ebece9; /* nested panels (terminal chrome, etc.) shade down slightly */
-  --color-paper: #14201a; /* primary text — near-black, cool green undertone */
-  --color-ink-soft: #4d564f; /* secondary text */
-  --color-pine: #2f7a52; /* more saturated than the flat darkened value — reads vivid on white, still AA */
+  
+  --color-bg: #ffffff; 
+  --color-surface: #f6f7f6; 
+  --color-surface-raised: #ebece9; 
+  --color-paper: #14201a; 
+  --color-ink-soft: #4d564f; 
+  --color-pine: #2f7a52;
   --color-pine-dim: #235f3f;
-  --color-brass: #a67a2e; /* more saturated gold, holds contrast without going muddy */
-  --color-stone: #838c86; /* muted/tertiary text */
+  --color-brass: #a67a2e; 
+  --color-stone: #838c86; 
 
-  /* project accent variants — saturated up from the initial flat-darkened
-     pass, so they read as vivid on white instead of muted/dull, while
-     still holding contrast; same hue family/identity throughout */
   --color-accent-clay: #b8552a;
   --color-accent-slate: #3f6690;
   --color-accent-plum: #93459e;
@@ -56,7 +45,6 @@
   }
 }
 
-/* ============ BASE ============ */
 html {
   scroll-behavior: smooth;
 }
@@ -69,18 +57,10 @@ body {
   overflow-x: hidden;
 }
 
-/* hairline divider color used repeatedly via border-line utility */
 @theme {
   --color-line: rgba(26, 29, 27, 0.1);
 }
 
-/* Text/border tokens for content that sits on an intentionally-dark
-   surface regardless of the site's own light/dark theme — project card
-   screenshot overlays (need light text over a photo of unknown brightness)
-   and the hero terminal (styled like a real dark-mode code editor, same as
-   VS Code staying dark under a light OS theme). Decoupled from --color-paper
-   so flipping the site theme doesn't make this text invisible against its
-   own always-dark backdrop. */
 @theme {
   --color-on-dark: #edeae2;
   --color-on-dark-soft: rgba(237, 234, 226, 0.55);
@@ -104,11 +84,6 @@ button:focus-visible {
   }
 }
 
-/* ============ WORK CARD ACCENT THEMING ============
-   Each card sets --card-accent inline (see components/Work.tsx). These
-   rules key off that variable so every card gets its own hover tint
-   without per-card CSS classes. Falls back to pine for browsers without
-   color-mix() support. */
 .work-card {
   --card-accent: var(--color-pine);
 }

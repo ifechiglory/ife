@@ -8,6 +8,7 @@ import { useMagnetic } from "@/hooks/useMagnetic";
 const links = [
   { href: "#about", label: "About" },
   { href: "#work", label: "Work" },
+  { href: "#projects", label: "Projects" },
   { href: "#teaching", label: "Teaching" },
   { href: "#contact", label: "Contact" },
 ];
@@ -22,7 +23,7 @@ export default function Nav() {
     setScrolled(latest > 40);
   });
 
-  // lock body scroll while the mobile menu is open
+
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
@@ -32,11 +33,6 @@ export default function Nav() {
 
   return (
     <>
-      {/* Outer wrapper stays full-width and fixed — this is what lets the
-          inner bar appear to "float" and shrink inward on scroll, rather
-          than the whole fixed strip resizing (which would look like the
-          page itself narrowing). Matches Aceternity's resizable-navbar
-          approach: an outer positioning layer + an inner animated bar. */}
       <div className="fixed inset-x-0 top-0 z-30 flex justify-center px-4 pt-4 md:px-6 md:pt-5">
         <motion.nav
           animate={{

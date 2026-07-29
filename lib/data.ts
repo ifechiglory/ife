@@ -11,7 +11,6 @@ export interface Project {
   tools: string[];
   liveUrl?: string;
   githubUrl?: string;
-  /** Path under /public — swap the placeholder gradient for a real screenshot here. */
   image: string;
 }
 

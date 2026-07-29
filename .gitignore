@@ -39,13 +39,3 @@ pnpm-debug.log*
 .vscode/*
 !.vscode/extensions.json
 *.swp
-
-# ---- generated project screenshots ----
-# npm run shots (scripts/screenshots) writes WebP captures here from each
-# project's live URL. These ARE committed (not ignored): most deploy
-# platforms (Vercel, Netlify, etc.) build straight from the pushed repo,
-# so anything not committed simply isn't there on the live site — and
-# running Puppeteer as a build step is slow/flaky on most build
-# environments anyway. Re-run `npm run shots` locally and commit the
-# updated files whenever a project's live site changes enough to warrant
-# a fresh screenshot.

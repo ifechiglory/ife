@@ -31,7 +31,7 @@ export default function Loader({ onComplete }: LoaderProps) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-bg"
+      className="fixed inset-0 z-100 flex items-center justify-center bg-bg"
       aria-hidden
     >
       <div ref={wrapRef} className="flex items-center font-mono text-4xl sm:text-5xl">
@@ -49,13 +49,9 @@ export default function Loader({ onComplete }: LoaderProps) {
             visible before any animation has run. */}
         <span
           data-caret
-          className="ml-0.5 inline-block h-[0.7em] w-[3px] translate-y-[2px] bg-pine"
+          className="ml-0.5 inline-block h-[0.7em] w-0.75 translate-y-0.5 bg-pine"
         />
 
-        {/* the actual logo mark — dot + "Ife" — styled to exactly match
-            the real nav logo (font-display, same weight/tracking), so this
-            is the part that travels and scales down to the measured
-            destination with nothing needing to visually "become" it */}
         <div ref={logoRef} className="mx-1 flex origin-left items-center gap-2.5">
           <span data-dot className="inline-block h-2.5 w-2.5 shrink-0 rounded-full bg-pine shadow-[0_0_16px_rgba(47,122,82,0.7)]" />
           <span data-chars="logo" className="font-display font-semibold tracking-tight text-paper">

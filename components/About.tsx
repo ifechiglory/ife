@@ -50,7 +50,7 @@ function CountUpStat({ value, suffix, label }: { value: number; suffix: string; 
 
 export default function About() {
   return (
-    <section id="about" className="relative z-[2] border-t border-line px-6 py-24 md:px-20 md:py-36">
+    <section id="about" className="relative z-2 border-t border-line px-6 py-24 md:px-20 md:py-36">
       <div className="mb-16 flex items-baseline gap-3 md:gap-4.5">
         <span className="font-mono text-sm text-pine">01</span>
         <h2 className="font-display text-[26px] font-medium tracking-tight text-paper md:whitespace-nowrap md:text-[42px]">
@@ -66,14 +66,14 @@ export default function About() {
           viewport={viewportOnce}
           variants={slideFromLeft}
         >
-          <p className="mb-5 max-w-[620px] text-[16.5px] leading-[1.8] text-ink-soft">
+          <p className="mb-5 max-w-155 text-[16.5px] leading-[1.8] text-ink-soft">
             Hello! I&apos;m Ife, a frontend developer who loves turning ideas
             into clean, usable interfaces that actually make sense to
             humans. My journey into web development started with curiosity
-            — and a lot of breaking things in the browser, which taught me
+            - and a lot of breaking things in the browser, which taught me
             more than any tutorial could.
           </p>
-          <p className="mb-5 max-w-[620px] text-[16.5px] leading-[1.8] text-ink-soft">
+          <p className="mb-5 max-w-155 text-[16.5px] leading-[1.8] text-ink-soft">
             Today I work primarily as a{" "}
             <strong className="font-medium text-paper">frontend developer</strong>,
             building responsive, user-focused web applications with React,
@@ -81,10 +81,10 @@ export default function About() {
             ministry landing pages to full e-commerce storefronts with cart
             flows, authentication, and real deployment constraints.
           </p>
-          <p className="mb-5 max-w-[620px] text-[16.5px] leading-[1.8] text-ink-soft">
+          <p className="mb-5 max-w-155 text-[16.5px] leading-[1.8] text-ink-soft">
             Beyond building, I also{" "}
             <strong className="font-medium text-paper">teach frontend development</strong>{" "}
-            — breaking complex concepts into practical, beginner-friendly
+            - breaking complex concepts into practical, beginner-friendly
             lessons. Helping students go from &quot;HTML looks scary&quot;
             to confidently shipping projects is one of the most rewarding
             parts of what I do.
