@@ -3,16 +3,20 @@ import { ImageResponse } from "next/og";
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
-// Matches the real nav logo (see components/Nav.tsx #nav-logo): a small
-// pine-green dot next to "Ife" in the display serif. Colors are hardcoded
-// to match the --color-bg / --color-pine / --color-paper values in
-// app/globals.css — next/og's renderer can't read CSS custom properties
-// or use next/font instances directly (those only expose a CSS class/
-// family name, not the raw font bytes ImageResponse needs), so the font
-// file is fetched here via Google Fonts' CSS API — the standard pattern
-// for loading a real font into an ImageResponse. Falls back to a generic
-// serif if the fetch fails for any reason (offline build, rate limit),
-// so the favicon still renders something reasonable either way.
+// Matches the real nav logo (see components/Nav.tsx #nav-logo) in
+// typeface, though not the dot — this is a text-only "Ife" monogram, the
+// same treatment as "T.O." for Toyosi Olosunde. The pine dot used
+// elsewhere on the site (nav, hero terminal, status indicator) reads as
+// a decorative bullet rather than a meaningful mark at favicon sizes, so
+// it's dropped here. Colors are hardcoded to match the --color-bg /
+// --color-paper values in app/globals.css — next/og's renderer can't
+// read CSS custom properties or use next/font instances directly (those
+// only expose a CSS class/family name, not the raw font bytes
+// ImageResponse needs), so the font file is fetched here via Google
+// Fonts' CSS API — the standard pattern for loading a real font into an
+// ImageResponse. Falls back to a generic serif if the fetch fails for
+// any reason (offline build, rate limit), so the favicon still renders
+// something reasonable either way.
 async function loadFrauncesBold(): Promise<ArrayBuffer | null> {
   try {
     const css = await fetch(
@@ -44,17 +48,6 @@ export default async function Icon() {
           borderRadius: "7px",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            width: 7,
-            height: 7,
-            borderRadius: "50%",
-            background: "#2f7a52",
-            marginRight: 3,
-            marginBottom: 2,
-          }}
-        />
         <div
           style={{
             display: "flex",

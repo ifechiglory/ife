@@ -6,6 +6,12 @@ export const contentType = "image/png";
 // Larger version of the same mark as icon.tsx (browser tab favicon), for
 // iOS home-screen bookmarks — see that file for the shared font-loading
 // approach and why colors are hardcoded rather than read from CSS tokens.
+//
+// Text-only "Ife" monogram, no accompanying dot — the pine dot used
+// elsewhere (nav logo, hero terminal, status indicator) reads as a
+// decorative bullet at favicon sizes rather than a meaningful mark, so
+// it's dropped here in favor of a clean two-letter-style monogram, the
+// same treatment as "T.O." for Toyosi Olosunde.
 async function loadFrauncesBold(): Promise<ArrayBuffer | null> {
   try {
     const css = await fetch(
@@ -36,17 +42,6 @@ export default async function AppleIcon() {
           background: "#ffffff",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            width: 34,
-            height: 34,
-            borderRadius: "50%",
-            background: "#2f7a52",
-            marginRight: 14,
-            marginBottom: 8,
-          }}
-        />
         <div
           style={{
             display: "flex",
