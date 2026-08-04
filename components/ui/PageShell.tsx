@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
-import Loader from "@/components/Loader";
+import Loader from "@/components/ui/Loader";
 
 export default function PageShell({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);

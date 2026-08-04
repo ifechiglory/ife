@@ -58,4 +58,4 @@ export const iconHover = {
   whileTap: { scale: 0.95 },
 };
 
-export const viewportOnce = { once: true, margin: "-15% 0px -15% 0px" } as const;
+export const viewportOnce = { once: true, margin: "0px 0px -5% 0px" } as const;

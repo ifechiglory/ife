@@ -2,7 +2,7 @@
 
 import { motion, useMotionTemplate, useMotionValue } from "motion/react";
 import { useState, type MouseEvent } from "react";
-import { slideFromLeft, slideFromRight, viewportOnce } from "@/lib/motion";
+import { revealUp, slideFromLeft, slideFromRight, viewportOnce } from "@/lib/motion";
 
 const chatSequence = [
   { delay: 0.1, type: "student" as const, text: "honestly HTML still looks like a foreign language to me 😩" },
@@ -41,13 +41,19 @@ export default function Teaching() {
 
   return (
     <section id="teaching" className="relative z-2 border-t border-line px-6 py-24 md:px-20 md:py-36">
-      <div className="mb-16 flex items-baseline gap-3 md:gap-4.5">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        variants={revealUp}
+        className="mb-16 flex items-baseline gap-3 md:gap-4.5"
+      >
         <span className="font-mono text-sm text-pine">04</span>
         <h2 className="font-display text-[26px] font-medium tracking-tight text-paper md:whitespace-nowrap md:text-[42px]">
           Teaching
         </h2>
         <span className="mt-1 h-px flex-1 bg-line" />
-      </div>
+      </motion.div>
 
       <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <motion.div
@@ -145,14 +151,13 @@ export default function Teaching() {
             just the <em className="italic text-pine">how</em>.
           </h3>
           <p className="mb-6 max-w-120 text-[15.5px] leading-[1.75] text-ink-soft">
-            Since 2023 I&apos;ve mentored beginner developers at West Africa
-            People&apos;s Institute and, currently, Attueyi Coding Academy -
+            Since 2024 I&apos;ve mentored beginner developers at Attueyi Coding Academy -
             breaking down complex frontend concepts into practical,
             project-based lessons that actually stick.
           </p>
           <p className="mb-6 max-w-120 text-[15.5px] leading-[1.75] text-ink-soft">
             Teaching sharpens the way I build. Explaining a concept clearly
-            to someone new means I understand it more deeply myself — which
+            to someone new means I understand it more deeply myself - which
             shows up in cleaner components and more maintainable code.
           </p>
 

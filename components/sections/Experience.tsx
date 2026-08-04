@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion } from "motion/react";
 import { experience } from "@/lib/data";
 import { useTimelineProgress } from "@/hooks/useTimelineProgress";
-import { viewportOnce } from "@/lib/motion";
+import { revealUp, viewportOnce } from "@/lib/motion";
 
 export default function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,13 +13,19 @@ export default function Experience() {
 
   return (
     <section id="work" className="relative z-2 border-t border-line px-6 py-24 md:px-20 md:py-36">
-      <div className="mb-16 flex items-baseline gap-3 md:gap-4.5">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        variants={revealUp}
+        className="mb-16 flex items-baseline gap-3 md:gap-4.5"
+      >
         <span className="font-mono text-sm text-pine">02</span>
         <h2 className="font-display text-[26px] font-medium tracking-tight text-paper md:whitespace-nowrap md:text-[42px]">
           Where I&apos;ve Worked
         </h2>
         <span className="mt-1 h-px flex-1 bg-line" />
-      </div>
+      </motion.div>
 
       <div ref={containerRef} className="relative ml-1.5 max-w-190">
         <div className="absolute inset-y-1.5 left-0 w-px bg-line" />

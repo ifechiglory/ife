@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Jost, JetBrains_Mono } from "next/font/google";
 import { SITE_URL, SITE_NAME, SITE_TITLE, SITE_DESCRIPTION } from "@/lib/site";
+import PageShell from "@/components/ui/PageShell";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -85,7 +86,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        {children}
+        <PageShell>{children}</PageShell>
       </body>
     </html>
   );

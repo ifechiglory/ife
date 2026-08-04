@@ -6,15 +6,17 @@ import { ArrowRight } from "lucide-react";
 import { useMagnetic } from "@/hooks/useMagnetic";
 import { useTilt } from "@/hooks/useTilt";
 import { useTerminalSequence } from "@/hooks/useTerminalSequence";
-import GridBackground from "@/components/GridBackground";
+import { useTerminalNav } from "@/hooks/useTerminalNav";
+import { FlipWords } from "@/components/ui/FlipWords";
+import GridBackground from "@/components/ui/GridBackground";
 
-const headlineWords = ["I", "build"];
-
-const tailWords = ["and", "teach", "others", "to", "do", "the", "same."];
+const flipWords = ["build interfaces.", "teach frontend.", "ship real products.", "debug at 2am."];
 
 export default function Hero() {
   const terminalRef = useRef<HTMLDivElement>(null);
   useTerminalSequence(terminalRef);
+  const nav = useTerminalNav();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const primaryBtn = useMagnetic(0.35);
   const tilt = useTilt(14);
@@ -35,44 +37,15 @@ export default function Hero() {
         </motion.div>
 
         <h1 className="font-display text-[34px] font-medium leading-[1.12] tracking-tight text-paper sm:text-[42px] lg:text-[54px]">
-          {headlineWords.map((word, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.35 + i * 0.045 }}
-              className="inline-block"
-            >
-              {word}&nbsp;
-            </motion.span>
-          ))}
-          <motion.em
+          <motion.span
             initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{
-              duration: 0.6,
-              ease: [0.16, 1, 0.3, 1],
-              delay: 0.35 + headlineWords.length * 0.045,
-            }}
-            className="inline-block font-normal italic text-pine"
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
+            className="inline-block"
           >
-            interfaces for the browser,
-          </motion.em>{" "}
-          {tailWords.map((word, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{
-                duration: 0.6,
-                ease: [0.16, 1, 0.3, 1],
-                delay: 0.35 + (headlineWords.length + 1 + i) * 0.045,
-              }}
-              className="inline-block"
-            >
-              {word}&nbsp;
-            </motion.span>
-          ))}
+            I&nbsp;
+          </motion.span>
+          <FlipWords words={flipWords} duration={2600} className="text-pine" />
         </h1>
 
         <motion.div
@@ -83,6 +56,17 @@ export default function Hero() {
         >
           Ifechukwu Max-Oti
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.85 }}
+          className="mt-4 max-w-125 text-[15px] leading-[1.7] text-ink-soft"
+        >
+          Five years of client sites - cleaning companies, sports consultancies,
+          music ministries, e-commerce storefronts. The interesting part is figuring out what a client actually needs versus
+          what they asked for.
+        </motion.p>
 
         <motion.div
           initial={{ opacity: 0 }}
@@ -170,7 +154,16 @@ export default function Hero() {
               </span>
             </div>
 
-            <div className="px-6 py-6.5 pb-7.5 font-mono text-[13.5px] leading-[1.9]">
+            <div
+              onClick={() => {
+                if (window.innerWidth < 768) return;
+                if (!nav.active) nav.activate();
+                inputRef.current?.focus();
+              }}
+              className={`px-6 py-6.5 pb-7.5 font-mono text-[13.5px] leading-[1.9] md:cursor-text ${
+                nav.active ? "md:hidden" : ""
+              }`}
+            >
               <div data-cmd="1" className="flex -translate-x-1.5 opacity-0">
                 <span className="mr-2.5 select-none text-pine">➜</span>
                 <span className="whitespace-pre text-on-dark/90">
@@ -213,6 +206,52 @@ export default function Hero() {
                 <span>✓ 2+ years, 2 institutions</span>
                 <span data-caret="4" className="ml-px inline-block h-3.75 w-1.75 bg-brass align-text-bottom opacity-0" />
               </div>
+            </div>
+
+            {/* Interactive command prompt — desktop only. Hidden until clicked,
+                so the scripted intro plays uninterrupted for anyone who doesn't
+                engage with it. */}
+            <div
+              className={`hidden px-6 py-6.5 pb-7.5 font-mono text-[13.5px] leading-[1.9] ${
+                nav.active ? "md:block" : "md:hidden"
+              }`}
+            >
+              {nav.log.map((line, i) => (
+                <div
+                  key={i}
+                  className={
+                    line.type === "command"
+                      ? "flex text-on-dark/90"
+                      : line.type === "error"
+                        ? "pl-5.5 text-[#E5675F]/80"
+                        : "pl-5.5 text-[#7FB88F]"
+                  }
+                >
+                  {line.type === "command" ? (
+                    <>
+                      <span className="mr-2.5 select-none text-pine">➜</span>
+                      <span className="whitespace-pre">{line.text}</span>
+                    </>
+                  ) : (
+                    line.text
+                  )}
+                </div>
+              ))}
+
+              <form onSubmit={nav.handleSubmit} className="flex items-center">
+                <span className="mr-2.5 select-none text-pine">➜</span>
+                <input
+                  ref={inputRef}
+                  value={nav.value}
+                  onChange={(e) => nav.setValue(e.target.value)}
+                  onClick={(e) => e.stopPropagation()}
+                  spellCheck={false}
+                  autoComplete="off"
+                  aria-label="Terminal command input — try 'help'"
+                  placeholder={nav.log.length === 0 ? "try: cd projects, or help" : ""}
+                  className="flex-1 bg-transparent font-mono text-[13.5px] text-on-dark/90 placeholder:text-on-dark/25 focus:outline-none"
+                />
+              </form>
             </div>
 
             <div className="flex justify-between border-t border-white/6 bg-[#232427] px-4.5 py-3 font-mono text-2.75 text-on-dark/35">
