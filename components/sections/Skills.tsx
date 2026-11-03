@@ -125,8 +125,8 @@
             className="absolute inset-y-0 right-0 z-10 w-10 pointer-events-none bg-linear-to-l from-bg to-transparent sm:w-20"
           />
 
-          <div className="skills-marquee">
-            <div className="skills-marquee">
+          <div className="overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:overflow-hidden">
+            <div className="skills-marquee max-md:!animate-none">
               <div className="flex gap-4 px-6 shrink-0 md:gap-5 md:px-20">
                 {skillNodes.map((skill) => (
                   <SkillCard key={skill.name} skill={skill} />
@@ -149,11 +149,6 @@
             </div>
           </div>
         </div>
-
-        <p className="mt-6 px-6 text-center font-mono text-[11px] text-stone/70 md:px-20">
-          Hover or focus the skill cards to pause the stream and explore each
-          tool.
-        </p>
       </section>
     );
   }
