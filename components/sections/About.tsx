@@ -51,14 +51,14 @@ export default function About() {
           viewport={viewportOnce}
           variants={slideFromRight}
         >
-          <p className="mb-5 max-w-155 text-[16.5px] leading-[1.8] text-ink-soft">
+          <p className="mb-5 max-w-155 text-[16.5px] leading-[1.8] text-ink-soft text-justify">
             Hello, I&apos;m Ife—a frontend developer who turns ideas into clear,
             usable interfaces. I started learning web development by taking
             websites apart: understanding how they worked and what shaped each
             interaction.
           </p>
 
-          <p className="mb-5 max-w-155 text-[16.5px] leading-[1.8] text-ink-soft">
+          <p className="mb-5 max-w-155 text-[16.5px] leading-[1.8] text-ink-soft text-justify">
             Today, I work primarily as a{" "}
             <strong className="font-medium text-paper">
               frontend developer
@@ -69,7 +69,7 @@ export default function About() {
             deployment constraints.
           </p>
 
-          <p className="mb-5 max-w-155 text-[16.5px] leading-[1.8] text-ink-soft">
+          <p className="mb-5 max-w-155 text-[16.5px] leading-[1.8] text-ink-soft text-justify">
             Beyond building, I also{" "}
             <strong className="font-medium text-paper">
               teach frontend development
