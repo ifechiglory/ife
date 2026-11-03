@@ -1,28 +1,14 @@
 import type { Metadata } from "next";
-import { Fraunces, Jost, JetBrains_Mono } from "next/font/google";
+import { Roboto } from "next/font/google";
 import { SITE_URL, SITE_NAME, SITE_TITLE, SITE_DESCRIPTION } from "@/lib/site";
 import PageShell from "@/components/ui/PageShell";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const roboto = Roboto({
   subsets: ["latin"],
-  variable: "--font-fraunces",
-  weight: ["300", "500", "600"],
+  variable: "--font-roboto",
+  weight: ["300", "400", "500", "700"],
   style: ["normal", "italic"],
-  display: "swap",
-});
-
-const jost = Jost({
-  subsets: ["latin"],
-  variable: "--font-jost",
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -30,6 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
+
   keywords: [
     "Ifechukwu Max-Oti",
     "frontend developer",
@@ -39,11 +26,14 @@ export const metadata: Metadata = {
     "frontend tutor",
     "Nigeria frontend developer",
   ],
+
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
+
   alternates: {
     canonical: SITE_URL,
   },
+
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
@@ -52,11 +42,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
   },
+
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
   },
+
   robots: {
     index: true,
     follow: true,
@@ -78,14 +70,19 @@ const personJsonLd = {
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${jost.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={roboto.variable}>
       <body>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd),
+          }}
         />
+
         <PageShell>{children}</PageShell>
       </body>
     </html>

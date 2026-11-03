@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { projects } from "@/lib/data";
-import ProjectFrame from './ProjectFrame'
+import ProjectFrame from "./ProjectFrame";
 import CaseStudyHeader from "@/components/sections/CaseStudyHeader";
 
 type Props = {
@@ -10,37 +10,59 @@ type Props = {
 };
 
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return projects.map((project) => ({
+    slug: project.slug,
+  }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
-  if (!project) return {};
+  const project = projects.find((item) => item.slug === slug);
+
+  if (!project) {
+    return {};
+  }
 
   return {
     title: `${project.title} — Case Study`,
-    description: project.problem,
+    description: project.summary,
   };
 }
 
 export default async function ProjectCaseStudy({ params }: Props) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
-  if (!project) notFound();
+  const project = projects.find((item) => item.slug === slug);
 
-  const currentIndex = projects.findIndex((p) => p.slug === slug);
-  const nextProject = projects[(currentIndex + 1) % projects.length];
+  if (!project) {
+    notFound();
+  }
+
+  const currentIndex = projects.findIndex((item) => item.slug === project.slug);
+
+  const nextProject =
+    projects.length > 1 ? projects[(currentIndex + 1) % projects.length] : null;
 
   const fields = [
-    { label: "The problem", value: project.problem },
-    { label: "What I decided", value: project.decision },
-    { label: "What was hard", value: project.challenge },
-    { label: "What I'd change", value: project.wouldChange },
+    {
+      label: "The challenge",
+      value: project.problem,
+    },
+    {
+      label: "The approach",
+      value: project.decision,
+    },
+    {
+      label: "Implementation challenge",
+      value: project.challenge,
+    },
+    {
+      label: "What I’d improve",
+      value: project.wouldChange,
+    },
   ];
 
   return (
-    <main className="min-h-screen bg-bg">
+    <main className="min-h-screen">
       <CaseStudyHeader
         title={project.title}
         tags={project.tagStrip}
@@ -52,31 +74,33 @@ export default async function ProjectCaseStudy({ params }: Props) {
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div className="space-y-10">
             {fields.map((field) => (
-              <div key={field.label}>
-                <span className="mb-2.5 block font-mono text-[11px] uppercase tracking-wide text-pine">
+              <section key={field.label}>
+                <h2 className="mb-2.5 font-mono text-[11px] uppercase tracking-wide text-pine">
                   {field.label}
-                </span>
+                </h2>
+
                 <p className="max-w-135 text-[16px] leading-[1.8] text-ink-soft">
                   {field.value}
                 </p>
-              </div>
+              </section>
             ))}
 
-            <div>
-              <span className="mb-2.5 block font-mono text-[11px] uppercase tracking-wide text-pine">
+            <section>
+              <h2 className="mb-2.5 font-mono text-[11px] uppercase tracking-wide text-pine">
                 Built with
-              </span>
-              <div className="flex flex-wrap gap-2">
+              </h2>
+
+              <ul className="flex flex-wrap gap-2">
                 {project.tools.map((tool) => (
-                  <span
+                  <li
                     key={tool}
                     className="rounded-full border border-line bg-surface px-3 py-1.5 font-mono text-[11px] text-stone"
                   >
                     {tool}
-                  </span>
+                  </li>
                 ))}
-              </div>
-            </div>
+              </ul>
+            </section>
           </div>
 
           <ProjectFrame
@@ -86,25 +110,32 @@ export default async function ProjectCaseStudy({ params }: Props) {
           />
         </div>
 
-        <div className="mt-24 border-t border-line pt-10">
-          <span className="mb-2 block font-mono text-[11px] uppercase tracking-wide text-stone">
-            Next up
-          </span>
-          <Link
-            href={`/work/${nextProject.slug}`}
-            className="group flex items-center justify-between gap-4"
+        {nextProject && (
+          <nav
+            aria-label="Next case study"
+            className="pt-10 mt-24 border-t border-line"
           >
-            <span className="font-display text-2xl font-medium text-paper transition-colors group-hover:text-pine md:text-3xl">
-              {nextProject.title}
+            <span className="mb-2 block font-mono text-[11px] uppercase tracking-wide text-stone">
+              Next case study
             </span>
-            <span
-              className="font-mono text-lg text-stone transition-transform duration-300 group-hover:translate-x-1.5 group-hover:text-pine"
-              aria-hidden="true"
+
+            <Link
+              href={`/work/${nextProject.slug}`}
+              className="flex items-center justify-between gap-4 rounded-sm outline-none group focus-visible:ring-2 focus-visible:ring-pine"
             >
-              →
-            </span>
-          </Link>
-        </div>
+              <span className="text-2xl font-medium transition-colors font-display text-paper group-hover:text-pine group-focus-visible:text-pine md:text-3xl">
+                {nextProject.title}
+              </span>
+
+              <span
+                aria-hidden="true"
+                className="font-mono text-lg text-stone transition-transform duration-300 group-hover:translate-x-1.5 group-hover:text-pine group-focus-visible:translate-x-1.5 group-focus-visible:text-pine"
+              >
+                →
+              </span>
+            </Link>
+          </nav>
+        )}
       </div>
     </main>
   );

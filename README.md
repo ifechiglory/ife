@@ -5,18 +5,18 @@ developer and tutor, walking through my background, skills, work history,
 projects, and teaching — built as a showcase of both what I say I can do
 and how the site itself is put together.
 
-**Live site:** _add URL once deployed_
+**Live site:** [Live Site](https://ife-dev.netlify.app/)
 
 ---
 
 ## Tech stack
 
 | | |
-|---|---|
+| --- | --- |
 | Framework | [Next.js 15](https://nextjs.org/) (App Router) |
 | Language | TypeScript |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com/) — CSS-first config via `@theme`, no `tailwind.config.js` |
-| Animation | [Motion](https://motion.dev/) (Framer Motion's successor) + [GSAP](https://gsap.com/) |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com/) |
+| Animation | [Motion](https://motion.dev/) + [GSAP](https://gsap.com/) |
 | Icons | [Lucide](https://lucide.dev/) |
 
 ### Why two animation libraries
@@ -25,23 +25,18 @@ Motion and GSAP are deliberately split by what each is actually good at,
 not used interchangeably:
 
 - **Motion** owns every component-level interaction: hover and tap states,
-  scroll-triggered reveals, the magnetic-pull buttons, the terminal card's
-  cursor-tilt, animated count-up stats. These are all real Motion
-  primitives (`useMotionValue`, `useSpring`, `useTransform`, `whileHover`,
-  `whileInView`) — not hand-rolled spring math.
+  scroll-triggered reveals, the magnetic-pull buttons. These are all real Motion
+  primitives (`useMotionValue`, `useSpring`,  `whileInView`) — not hand-rolled spring math.
 - **GSAP** is scoped to the handful of things it's genuinely better at:
   precisely-timed, multi-phase timelines driven by real DOM measurement.
   Specifically: the full-screen intro loader's character-by-character
-  type-in and logo morph (`hooks/useLoaderSequence.ts`), the hero
-  terminal's typed-command sequence (`hooks/useTerminalSequence.ts`), and
-  the experience timeline's scroll-scrubbed progress line
+  type-in and logo morph and the experience timeline's scroll-scrubbed progress line
   (`hooks/useTimelineProgress.ts`).
 
 Every GSAP hook has a comment explaining specifically why that effect
 stays off Motion — the short version is: Motion's declarative variants are
 the right tool for independent component reveals, and a worse fit for "run
-this exact frame-accurate sequence across a dozen unrelated DOM nodes,"
-which is what a terminal session or a type-in loader actually is.
+this exact frame-accurate sequence across a dozen unrelated DOM nodes," a type-in loader actually is.
 
 ### Why Tailwind v4
 
@@ -49,39 +44,7 @@ Config lives entirely in `app/globals.css` via the `@theme` block — colors,
 fonts, and animation keyframes are declared as CSS custom properties, and
 Tailwind auto-generates the matching utility classes (`--color-pine` →
 `bg-pine`, `text-pine`, `border-pine`, etc). No `tailwind.config.js`
-anywhere in the project.
-
----
-
-## Design system
-
-- **Palette** — a cool white/paper background with a muted pine-green and
-  brass accent pair, plus six additional accent hues (clay, slate, plum,
-  gold, teal, sky) used to give each project card in the Work section its
-  own identity. All colors are defined once as tokens and referenced
-  everywhere via `var(--color-*)`, including inside dynamically-generated
-  inline styles (gradients, glows) — nothing is a hardcoded hex outside of
-  `globals.css` except where content is deliberately theme-independent
-  (see below).
-- **Typography** — [Fraunces](https://fonts.google.com/specimen/Fraunces)
-  for display/headings, [Jost](https://fonts.google.com/specimen/Jost) for
-  body copy, [JetBrains Mono](https://www.jetbrains.com/lp/mono/) for
-  anything code-flavored (the terminal, tags, labels). All three load via
-  `next/font/google` in `app/layout.tsx`.
-
-  > Jost is a stand-in for **Futura**, which was the original brief but is
-  > a licensed commercial typeface (Monotype) unavailable through
-  > `next/font`. Jost shares Futura's geometric letterforms (circular O,
-  > geometric M) closely enough to hold the look until Futura is licensed
-  > and self-hosted.
-
-- **Dark UI surfaces** — the hero terminal and the project cards' hover
-  overlays are intentionally dark regardless of the site's own (light)
-  theme — the same way a code editor or a photo caption stays dark under a
-  light OS theme. These use a separate `--color-on-dark` token trio,
-  decoupled from the main text/background tokens, so they can't
-  accidentally go illegible if the site's overall theme changes.
-
+anywhere in the project
 ---
 
 ## Structure

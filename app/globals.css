@@ -1,48 +1,60 @@
 @import "tailwindcss";
 
 @theme {
-  
-  --color-bg: #ffffff; 
-  --color-surface: #f6f7f6; 
-  --color-surface-raised: #ebece9; 
-  --color-paper: #14201a; 
-  --color-ink-soft: #4d564f; 
-  --color-pine: #2f7a52;
-  --color-pine-dim: #235f3f;
-  --color-brass: #a67a2e; 
-  --color-stone: #838c86; 
+  /* Base surfaces */
+  --color-bg: #f5f7fb;
+  --color-surface: #ffffff;
+  --color-surface-raised: #edf1f7;
 
-  --color-accent-clay: #b8552a;
-  --color-accent-slate: #3f6690;
-  --color-accent-plum: #93459e;
-  --color-accent-gold: #a67a2e;
-  --color-accent-teal: #1f7d74;
-  --color-accent-sky: #1f74a6;
+  /* Text */
+  --color-paper: #132432;
+  --color-ink-soft: #435764;
+  --color-stone: #687b87;
 
-  --font-display: var(--font-fraunces), ui-serif, serif;
-  --font-body: var(--font-jost), "Futura", ui-sans-serif, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  /* Primary accent — aligned with existing purple illustrations */
+  --color-pine: #6258e8;
+  --color-pine-dim: #4d45b8;
 
-  --animate-pulse-dot: pulse-dot 1.8s ease-in-out infinite;
-  --animate-blink: blink 1s step-end infinite;
+  /* Warm supporting accent */
+  --color-brass: #986216;
 
-  @keyframes pulse-dot {
-    0%,
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.4;
-      transform: scale(0.7);
-    }
-  }
+  /* Supporting project and skill accents */
+  --color-accent-clay: #ce6953;
+  --color-accent-slate: #4d7fd2;
+  --color-accent-plum: #9566c9;
+  --color-accent-gold: #b8791b;
+  --color-accent-teal: #278f8a;
+  --color-accent-sky: #4b91d6;
 
-  @keyframes blink {
-    50% {
-      opacity: 0;
-    }
-  }
+  /* Borders and global grid */
+  --color-line: rgb(19 36 50 / 0.1);
+
+  /*
+    Dark UI surfaces remain intentionally independent:
+    project-card image overlays, browser preview chrome,
+    terminal UI, and any dark image-caption surface.
+  */
+  --color-on-dark: #f5f7fb;
+  --color-on-dark-line: rgb(245 247 251 / 0.22);
+
+  /* Browser-preview controls */
+  --color-browser-chrome: #182a37;
+  --color-window-close: #df7169;
+  --color-window-minimize: #d8a641;
+  --color-window-maximize: #63b560;
+
+  /* Availability status */
+  --color-status-available: #6258e8;
+
+  /* Fonts: Roboto until you decide on a second typeface */
+  --font-display: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    monospace;
 }
 
 html {
@@ -57,40 +69,24 @@ body {
   overflow-x: hidden;
 }
 
-@theme {
-  --color-line: rgba(26, 29, 27, 0.1);
-}
-
-@theme {
-  --color-on-dark: #edeae2;
-  --color-on-dark-soft: rgba(237, 234, 226, 0.55);
-  --color-on-dark-line: rgba(255, 255, 255, 0.12);
-}
-
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+[tabindex]:focus-visible {
   outline: 2px solid var(--color-pine);
   outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
 }
 
 .work-card {
   --card-accent: var(--color-pine);
 }
 
-.work-card:hover {
-  border-color: rgba(47, 122, 82, 0.35); /* fallback, matches new --color-pine */
-  border-color: color-mix(in srgb, var(--card-accent) 45%, transparent);
+.work-card:hover,
+.work-card:focus-within {
+  border-color: color-mix(
+    in srgb,
+    var(--card-accent) 45%,
+    transparent
+  );
 }
 
 .work-card .live-link:hover {
@@ -103,4 +99,48 @@ button:focus-visible {
 
 .work-card [data-case-cta]:hover {
   background: var(--card-accent);
+}
+
+@keyframes skills-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.skills-marquee {
+  display: flex;
+  width: max-content;
+  animation: skills-marquee 35s linear infinite;
+}
+
+.skills-marquee:hover,
+.skills-marquee:focus-within {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .skills-marquee {
+    width: 100%;
+    animation: none;
+  }
+
+  .skills-marquee > [aria-hidden="true"] {
+    display: none;
+  }
 }

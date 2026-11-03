@@ -1,7 +1,7 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
-import { Github, Linkedin } from "lucide-react";
 import { useMagnetic } from "@/hooks/useMagnetic";
 import { viewportOnce } from "@/lib/motion";
 
@@ -9,59 +9,73 @@ export default function Contact() {
   const magnetic = useMagnetic(0.3);
 
   return (
-    <section id="contact" className="relative z-2 border-t border-line px-6 py-24 pb-24 text-center md:px-20 md:py-36">
+    <section
+      id="contact"
+      className="relative px-6 py-24 text-center border-t z-2 border-line md:px-20 md:py-36"
+    >
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{
+          opacity: 0,
+          y: 30,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
         viewport={viewportOnce}
-        transition={{ duration: 0.7 }}
+        transition={{
+          duration: 0.7,
+        }}
       >
-        <div className="mb-5 font-mono text-sm text-pine">05. What&apos;s Next?</div>
-        <h2 className="mb-5 font-display text-[34px] font-medium text-paper sm:text-[58px]">
-          Get In Touch
-        </h2>
-        <p className="mx-auto mb-11 max-w-120 text-base leading-[1.7] text-ink-soft">
-          I&apos;m currently open to new opportunities - whether that&apos;s
-          a frontend role, a client project, or just a conversation about
-          the web. My inbox is always open.
+        <p className="mb-5 font-mono text-sm text-pine">
+          06. What&apos;s next?
         </p>
 
-        <motion.div
-          ref={magnetic.ref}
-          style={{ x: magnetic.x, y: magnetic.y }}
-          onMouseMove={magnetic.onMouseMove}
-          onMouseLeave={magnetic.onMouseLeave}
-          className="inline-block"
-        >
-          <a
-            href="mailto:ifechiglory@gmail.com?subject=Hello%20from%20your%20portfolio!&body=Hi%20there%2C%20I%20just%20saw%20your%20portfolio%20and%20wanted%20to%20reach%20out..."
-            className="inline-block rounded border border-paper bg-paper px-8.5 py-4.5 font-mono text-[15px] text-bg"
-          >
-            Say Hello
-          </a>
-        </motion.div>
+        <div className="flex flex-col items-center justify-center gap-6 md:flex-row md:gap-12">
+          <Image
+            src="/images/email.svg"
+            alt=""
+            aria-hidden="true"
+            width={200}
+            height={200}
+          />
 
-        <div className="mt-8 flex items-center justify-center gap-6">
-          <a
-            href="https://github.com/ifechiglory"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="flex items-center gap-2 font-mono text-sm text-ink-soft transition-colors hover:text-pine"
+          <div>
+            <h2 className="mb-5 font-display text-[34px] font-medium text-paper sm:text-[58px]">
+              Get in touch
+            </h2>
+
+            <p className="mx-auto mb-8 max-w-120 text-base leading-[1.7] text-ink-soft">
+              I&apos;m currently open to new opportunities—whether that&apos;s
+              a frontend role, a client project, or a conversation about the
+              web.
+            </p>
+
+            <a
+              href="mailto:ifechiglory@gmail.com"
+              className="font-mono text-xs underline transition-colors outline-none text-stone decoration-stone/50 underline-offset-4 hover:text-paper focus-visible:text-paper focus-visible:ring-2 focus-visible:ring-pine"
+            >
+              ifechiglory@gmail.com
+            </a>
+          </div>
+
+          <motion.div
+            ref={magnetic.ref}
+            style={{
+              x: magnetic.x,
+              y: magnetic.y,
+            }}
+            onMouseMove={magnetic.onMouseMove}
+            onMouseLeave={magnetic.onMouseLeave}
+            className="inline-block"
           >
-            <Github className="h-4 w-4" />
-            GitHub
-          </a>
-          <a
-            href="https://www.linkedin.com/in/ifechukwumaxoti/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="flex items-center gap-2 font-mono text-sm text-ink-soft transition-colors hover:text-pine"
-          >
-            <Linkedin className="h-4 w-4" />
-            LinkedIn
-          </a>
+            <a
+              href="mailto:ifechiglory@gmail.com?subject=Portfolio%20enquiry"
+              className="inline-block rounded border border-paper bg-paper px-8.5 py-4.5 font-mono text-[15px] text-bg outline-none transition-colors hover:border-pine hover:bg-pine focus-visible:ring-2 focus-visible:ring-pine focus-visible:ring-offset-4 focus-visible:ring-offset-bg"
+            >
+              Say hello
+            </a>
+          </motion.div>
         </div>
       </motion.div>
     </section>

@@ -164,7 +164,7 @@ export default function Teaching() {
           <div className="flex gap-10">
             <div>
               <div className="font-display text-[30px] text-paper">
-                <span className="text-brass">2</span>+
+                <span className="text-brass">3 </span>+
               </div>
               <div className="mt-1 font-mono text-[11px] uppercase text-stone">Years teaching</div>
             </div>

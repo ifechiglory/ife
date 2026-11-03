@@ -5,8 +5,8 @@ export default function GridBackground({
 }) {
   return (
     <div
-      aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10 opacity-[1]"
+      aria-hidden="true"
+      className="fixed inset-0 z-0 pointer-events-none select-none"
       style={{
         backgroundImage:
           "linear-gradient(var(--color-line) 1px, transparent 1px), linear-gradient(90deg, var(--color-line) 1px, transparent 1px)",

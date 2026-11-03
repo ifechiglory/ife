@@ -1,22 +1,36 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
+import { MotionConfig } from "motion/react";
 import Loader from "@/components/ui/Loader";
+import GridBackground from "@/components/ui/GridBackground";
 
 export default function PageShell({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
+  const handleLoaderComplete = useCallback(() => {
+    setLoading(false);
+  }, []);
+
   useEffect(() => {
-    document.body.style.overflow = loading ? "hidden" : "";
+    const fallbackTimer = window.setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+
     return () => {
-      document.body.style.overflow = "";
+      window.clearTimeout(fallbackTimer);
     };
-  }, [loading]);
+  }, []);
 
   return (
-    <>
-      {loading && <Loader onComplete={() => setLoading(false)} />}
-      <div style={{ visibility: loading ? "hidden" : "visible" }}>{children}</div>
-    </>
+    <MotionConfig reducedMotion="user">
+      <div className="relative min-h-screen isolate overflow-x-clip bg-bg">
+        <GridBackground />
+
+        <div className="relative z-2">{children}</div>
+
+        {loading && <Loader onComplete={handleLoaderComplete} />}
+      </div>
+    </MotionConfig>
   );
 }
